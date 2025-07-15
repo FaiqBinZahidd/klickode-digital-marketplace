@@ -1,0 +1,11 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- White background -->
+  <rect width="200" height="200" rx="20" fill="white"/>
+  
+  <!-- Red square -->
+  <rect x="20" y="20" width="160" height="160" rx="16" fill="#E53935"/>
+  
+  <!-- Code brackets -->
+  <path d="M65 80L40 100L65 120" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M135 80L160 100L135 120" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
