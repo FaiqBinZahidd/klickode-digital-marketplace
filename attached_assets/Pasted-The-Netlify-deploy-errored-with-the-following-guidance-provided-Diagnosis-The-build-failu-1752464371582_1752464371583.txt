@@ -1,0 +1,124 @@
+The Netlify deploy errored, with the following guidance provided:
+
+**Diagnosis:**
+The build failure is due to an error in resolving the dependency "serverless-http" in the Netlify Function `api.js`.
+
+**Solution:**
+1. **Verifying Dependency:** Ensure that "serverless-http" is listed as a dependency in the `package.json` file or that the file was committed to the repository.
+   
+2. **Installing the Dependency:**
+   - **Option 1:** Remove the `package.json` from the Function and add "serverless-http" to the top-level `package.json`.
+   - **Option 2:** Run `npm install` or `yarn` inside the Netlify Function in the build command.
+   - **Option 3:** Add the "@netlify/plugin-functions-install-core" plugin to the "netlify.toml" file:
+
+```toml
+[[plugins]]
+package = "@netlify/plugin-functions-install-core"
+```
+
+By following these steps, the build should be able to resolve the "serverless-http" dependency successfully.
+
+The relevant error logs are:
+
+Line 0: build-image version: 068c1c7d7725d329cc382184c7bbf62ac27e2c09 (noble)
+Line 1: buildbot version: 1ad41682c3cb8ba50e6cec4a3cd94c50f999b538
+Line 2: Fetching cached dependencies
+Line 3: Failed to fetch cache, continuing with build
+Line 4: Starting to prepare the repo for build
+Line 5: No cached dependencies found. Cloning fresh repo
+Line 6: git clone --filter=blob:none https://github.com/FaiqBinZahidd/KLICKODE_NETLIFY
+Line 7: Preparing Git Reference refs/heads/main
+Line 8: Starting to install dependencies
+Line 9: Using PHP version
+Line 10: Downloading and installing node v18.20.8...
+Line 11: Downloading https://nodejs.org/dist/v18.20.8/node-v18.20.8-linux-x64.tar.xz...
+Line 12: Computing checksum with sha256sum
+Line 13: Checksums matched!
+Line 24: removed 13 packages, and changed 86 packages in 3s
+Line 25: 27 packages are looking for funding
+Line 26:   run `npm fund` for details
+Line 27: npm installed successfully
+Line 28: Installing npm packages using npm version 9.9.4
+Line 29: npm WARN EBADENGINE Unsupported engine {
+Line 30: npm WARN EBADENGINE   package: '@google/genai@1.9.0',
+Line 31: npm WARN EBADENGINE   required: { node: '>=20.0.0' },
+Line 32: npm WARN EBADENGINE   current: { node: 'v18.20.8', npm: '9.9.4' }
+Line 33: npm WARN EBADENGINE }
+Line 34: npm WARN deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+npm WARN deprecated @esbuild-kit/es
+Line 35: npm WARN deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+Line 36: added 567 packages in 8s
+Line 37: npm packages installed
+Line 38: Successfully installed dependencies
+Line 39: Starting build script
+Line 40: Detected 1 framework(s)
+Line 41: "vite" at version "5.4.19"
+Line 42: Section completed: initializing
+Line 43: [96m[1m​[22m[39m
+Line 44: [96m[1mNetlify Build                                                 [22m[39m
+Line 81: [2m../dist/public/[22m[2massets/[22m[36mindex-QTE3Gbds.js   [39m[1m[33m719.31 kB[39m[22m[2m │ gzip: 196.24 kB[22m
+Line 82: [33m
+Line 83: (!) Some chunks are larger than 500 kB after minification. Consider:
+Line 84: - Using dynamic import() to code-split the application
+Line 85: - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchun
+Line 86: - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+Line 87: [32m✓ built in 4.53s[39m
+Line 88: Copied _redirects file to build output
+Line 89: Static build completed successfully!
+Line 90: Output directory: dist/public
+Line 91: Failed during stage 'building site': Build script returned non-zero exit code: 2
+Line 92: ​
+Line 93: [90m(build.command completed in 4.9s)[39m
+Line 94: [96m[1m​[22m[39m
+Line 95: [96m[1mFunctions bundling                                            [22m[39m
+Line 96: [96m[1m────────────────────────────────────────────────────────────────[22m[39m
+Line 97: ​
+Line 98: Packaging Functions from [36mnetlify/functions[39m directory:
+Line 99:  - api.js
+Line 100: ​
+Line 101: ✘ [ERROR] Could not resolve "serverless-http"
+Line 102:     netlify/functions/api.js:3:27:
+Line 103:       3 │ const serverless = require('serverless-http');
+Line 104:         ╵                            ~~~~~~~~~~~~~~~~~
+Line 105:   You can mark the path "serverless-http" as external to exclude it from the bundle, which will remove this error and leave the 
+Line 106: [91m[1m​[22m[39m
+Line 107: [91m[1mDependencies installation error                               [22m[39m
+Line 108: [91m[1m────────────────────────────────────────────────────────────────[22m[39m
+Line 109: ​
+Line 110:   [31m[1mError message[22m[39m
+Line 111:   A Netlify Function is using "serverless-http" but that dependency has not been installed yet.
+Line 112: ​
+Line 113:   By default, dependencies inside a Netlify Function's "package.json" are not automatically installed.
+  There are several ways 
+Line 114:     - Removing your Function's "package.json" and adding the dependencies to the project's top-level "package.json" instead. Thi
+Line 115:     - Running "npm install" or "yarn" inside your Netlify Function in your build command.
+Line 116:     - Adding the following plugin to your "netlify.toml":
+Line 117: ​
+Line 118:   [[plugins]]
+Line 119:   package = "@netlify/plugin-functions-install-core"
+Line 120: ​​
+Line 121:   Build failed with 1 error:
+Line 122:   netlify/functions/api.js:3:27: ERROR: Could not resolve "serverless-http"
+Line 123: ​
+Line 124:   [31m[1mResolved config[22m[39m
+Line 125:   build:
+Line 126:     command: node build-static.js
+Line 127:     commandOrigin: config
+Line 128:     environment:
+Line 129:       - NODE_VERSION
+Line 130:       - NPM_VERSION
+Line 131:     publish: /opt/build/repo/dist/public
+Line 132:     publishOrigin: config
+Line 133:   functions:
+Line 134:     "*":
+Line 135:       node_bundler: esbuild
+Line 136:   functionsDirectory: /opt/build/repo/netlify/functions
+Line 137:   headers:
+Line 138:     - for: /*
+      values:
+        Referrer-Policy: strict-origin-when-cross-origin
+        X-Content-Type-Options: nosniff
+   
+Line 139: Build failed due to a user error: Build script returned non-zero exit code: 2
+Line 140: Failing build: Failed to build site
+Line 141: Finished processing build request in 28.671s
