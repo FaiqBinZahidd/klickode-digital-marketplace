@@ -1,0 +1,80 @@
+
+Objective: Build a complete, full-stack digital marketplace web application named "Snipify".
+
+Core Concept: Snipify is a modern, AI-enhanced marketplace for developers, designers, and creators to buy and sell digital assets. These assets include code snippets, UI kits, web templates, 3D models, and more. The platform should be secure, performant, and provide an excellent user experience.
+
+A. User Authentication & Roles:
+
+Implement a robust authentication system using Firebase Auth.
+Support the following user roles with distinct permissions:
+Guest (Unauthenticated): Can browse templates but cannot purchase or access user-specific features.
+Buyer (Default registered user): Can purchase assets, access their library, use AI tools, and participate in the community.
+Seller: All Buyer permissions, plus access to a Seller Dashboard to upload/manage assets and track earnings.
+Admin: Full platform control, including user management, content approval, and payout processing.
+B. Marketplace & Product Pages:
+
+Browse Page: A central page to display all published assets in a grid.
+Category Filtering: Allow users to filter assets by categories (e.g., Web, Mobile, UI Kits, Icons, 3D Models).
+Template Card: Each asset in the grid should have a card showing its thumbnail, title, author, price, and stats (likes, sales).
+Product Detail Page: A dedicated page for each asset, featuring:
+High-resolution image or preview.
+Detailed description, tags, and technical specifications.
+Author information with a link to their profile.
+A secure purchase button.
+A tabbed section for Reviews and Q&A.
+An interactive preview panel.
+C. Purchasing & Seller System:
+
+Integrate Stripe for all financial transactions.
+Stripe Checkout: Handle individual asset purchases.
+Stripe Connect: Implement a seamless onboarding flow for sellers to connect their bank accounts for payouts.
+Commission Model: The platform takes a 20% commission on each sale. Sellers receive 80%.
+D. Dashboards:
+
+Seller Dashboard:
+An overview of total revenue, sales, and active templates.
+A list of their submitted templates with their status (Draft, In Review, Published).
+A form to upload new assets, with options for code-based live previews or file uploads.
+A payouts tab to manage their Stripe connection and view earnings.
+Admin Dashboard:
+User Management: View, search, and change roles for all users.
+Template Approval: A queue to review, test, and approve or reject new submissions from sellers.
+Payout Processing: A view to see sellers with pending balances and initiate Stripe transfers.
+E. AI-Powered Tools (using Genkit & Gemini):
+
+Create a dedicated "AI Tools" page with the following utilities:
+Code Generator: Generate code from a natural language description.
+Code Translator: Translate code between different programming languages.
+Code Optimizer: Rewrite code to improve performance, readability, or security.
+Code Explainer: Provide a detailed, step-by-step explanation of a code snippet.
+Code Debugger: Identify and suggest fixes for bugs in a code snippet.
+AI Learning Hub: An interactive page where an AI tutor teaches programming concepts with analogies, examples, and exercises.
+AI-Powered Code Execution: In the playground and preview areas, use an AI flow to simulate the execution of backend code and return the output.
+Framework: Next.js 14+ with the App Router.
+Language: TypeScript.
+Styling:
+Tailwind CSS for utility-first styling.
+ShadCN UI for the core component library.
+Use CSS variables for theming, defined in src/app/globals.css.
+AI Framework: Google Genkit is the exclusive choice for all AI flows.
+Backend Services:
+Firebase for Authentication.
+The app should be structured to use Firestore for the database and Firebase Storage for file uploads (mock data is acceptable for the initial build).
+Payments: Stripe SDK.
+Forms: React Hook Form with Zod for validation.
+Deployment: The application should be configured for deployment on Firebase App Hosting.
+Images: Use next/image for optimization. Use https://placehold.co for all placeholder images.
+Color Palette:
+Primary: A modern, energetic Red (#E53935).
+Background/Secondary: A clean White/Off-White (#FAFAFA).
+Accent: A light, interactive Red (#FFCDD2).
+Apply these to the HSL variables in globals.css.
+Typography:
+Body/Headlines: 'Roboto' (sans-serif).
+Code: 'Source Code Pro' (monospace).
+Layout:
+Clean, grid-based layout with ample whitespace.
+Create a modern, "3D-like" feel using shadows, rounded corners, and subtle depth effects.
+The design must be fully responsive and optimized for desktop, tablet, and mobile devices.
+Icons: Use Lucide React for all UI icons.
+This prompt provides a complete blueprint. Please build the Snipify application according to these specifications, creating all necessary files and components.
