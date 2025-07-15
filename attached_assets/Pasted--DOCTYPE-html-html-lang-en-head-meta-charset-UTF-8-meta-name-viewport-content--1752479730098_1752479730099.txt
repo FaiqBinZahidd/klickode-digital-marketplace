@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Checkered Background with Buttons & Particles</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+    background-color: #050505;
+    color: white;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .background {
+    position: absolute;
+    inset: 0;
+    background-color: #050505;
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    z-index: 1;
+  }
+
+  .particles-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .particle {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .content-container {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 600px;
+    padding: 2rem;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    color: white;
+  }
+
+  p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .btn {
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+
+  .btn.browse {
+    background: #FF3434;
+    box-shadow: 0 4px 20px rgba(255, 52, 52, 0.4);
+  }
+
+  .btn.browse:hover {
+    background: #e02e2e;
+    box-shadow: 0 6px 25px rgba(255, 52, 52, 0.6);
+    transform: translateY(-2px);
+  }
+
+  .btn.sell {
+    background: #5233FF;
+    box-shadow: 0 4px 20px rgba(82, 51, 255, 0.4);
+  }
+
+  .btn.sell:hover {
+    background: #4229d9;
+    box-shadow: 0 6px 25px rgba(82, 51, 255, 0.6);
+    transform: translateY(-2px);
+  }
+</style>
+</head>
+<body>
+
+  <div class="background">
+    <div class="particles-container" id="particles-container"></div>
+  </div>
+
+  <div class="content-container">
+    <h1>Modern Gradient</h1>
+    <p>A sleek, modern background with soft gradient spheres, subtle movement, and interactive particle effects. Perfect for contemporary web designs.</p>
+    <div class="button-group">
+      <button class="btn browse">Start Browsing</button>
+      <button class="btn sell">Start Selling</button>
+    </div>
+  </div>
+
+<script>
+  const particlesContainer = document.getElementById('particles-container');
+
+  document.addEventListener('mousemove', (e) => {
+    const mouseX = (e.clientX / window.innerWidth) * 100;
+    const mouseY = (e.clientY / window.innerHeight) * 100;
+
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+
+    const size = Math.random() * 4 + 2;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+
+    particle.style.left = `${mouseX}%`;
+    particle.style.top = `${mouseY}%`;
+
+    particlesContainer.appendChild(particle);
+
+    setTimeout(() => {
+      particle.style.transition = 'all 2s ease-out';
+      particle.style.left = `${mouseX + (Math.random() * 10 - 5)}%`;
+      particle.style.top = `${mouseY + (Math.random() * 10 - 5)}%`;
+      particle.style.opacity = '0';
+
+      setTimeout(() => {
+        particle.remove();
+      }, 2000);
+    }, 10);
+  });
+</script>
+
+</body>
+</html>
