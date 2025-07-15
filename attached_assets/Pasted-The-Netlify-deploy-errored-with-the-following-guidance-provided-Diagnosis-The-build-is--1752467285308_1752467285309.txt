@@ -1,0 +1,103 @@
+The Netlify deploy errored, with the following guidance provided:
+
+### Diagnosis:
+
+The build is failing at line 82 in the `klickode-logo.tsx` file because there are multiple exports with the same name "default."
+
+### Solution:
+
+To fix this issue:
+1. In the `klickode-logo.tsx` file, remove or rename one of the `export default KlickodeLogo;` declarations to have unique names.
+2. After making this change, push the updated code to the repository.
+3. Verify that the package is in the `package.json` and was committed to the repository.
+
+Once these steps are completed, trigger a new build to verify that the issue has been resolved.
+
+The relevant error logs are:
+
+Line 69: ​
+Line 70: [36m$ node build-static.js[39m
+Line 71: Building static version for Netlify...
+Line 72: Building client...
+Line 73: [36mvite v5.4.19 [32mbuilding for production...[36m[39m
+Line 74: transforming...
+Line 75: Browserslist: browsers data (caniuse-lite) is 9 months old. Please run:
+Line 76:   npx update-browserslist-db@latest
+Line 77:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+Line 78: [32m✓[39m 67 modules transformed.
+Line 79: [31mx[39m Build failed in 1.45s
+Line 80: [31merror during build:
+Line 81: [31m[vite:esbuild] Transform failed with 1 error:
+Line 82: /opt/build/repo/client/src/components/klickode-logo.tsx:21:7: ERROR: Multiple exports with the same name "default"[31m
+Line 83: file: [36m/opt/build/repo/client/src/components/klickode-logo.tsx:21:7[31m
+Line 84: [33m
+Line 85: [33mMultiple exports with the same name "default"[33m
+Line 86: 19 |  export default KlickodeLogo;
+Line 87: 20 |
+Line 88: 21 |  export default KlickodeLogo;
+Line 89:    |         ^
+Line 90: 22 |
+Line 91: [31m
+Line 92:     at failureErrorWithLog (/opt/build/repo/node_modules/vite/node_modules/esbuild/lib/main.js:1472:15)
+Line 93:     at /opt/build/repo/node_modules/vite/node_modules/esbuild/lib/main.js:755:50
+Line 94:     at responseCallbacks.<computed> (/opt/build/repo/node_modules/vite/node_modules/esbuild/lib/main.js:622:9)
+Line 95:     at handleIncomingPacket (/opt/build/repo/node_modules/vite/node_modules/esbuild/lib/main.js:677:12)
+Line 96:     at Socket.readFromStdout (/opt/build/repo/node_modules/vite/node_modules/esbuild/lib/main.js:600:7)
+Line 97:     at Socket.emit (node:events:524:28)
+Line 98:     at addChunk (node:internal/streams/readable:561:12)
+Line 99:     at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+Line 100:     at Readable.push (node:internal/streams/readable:392:5)
+Line 101:     at Pipe.onStreamRead (node:internal/stream_base_commons:191:23)[39m
+Line 102: Build failed: Error: Command failed: vite build
+Line 103: [90m    at genericNodeError (node:internal/errors:984:15)[39m
+Line 104: [90m    at wrappedFn (node:internal/errors:538:14)[39m
+Line 105: [90m    at checkExecSyncError (node:child_process:891:11)[39m
+Line 106: [90m    at execSync (node:child_process:963:15)[39m
+Line 107:     at [90mfile:///opt/build/repo/[39mbuild-static.js:15:3
+Line 108: [90m    at ModuleJob.run (node:internal/modules/esm/module_job:263:25)[39m
+Line 109: [90m    at async ModuleLoader.import (node:internal/modules/esm/loader:540:24)[39m
+Line 110: [90m    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)[39m {
+Line 111:   status: [33m1[39m,
+Line 112:   signal: [1mnull[22m,
+Line 113:   output: [ [1mnull[22m, [1mnull[22m, [1mnull[22m ],
+Line 114:   pid: [33m2035[39m,
+Line 115:   stdout: [1mnull[22m,
+Line 116:   stderr: [1mnull[22m
+Line 117: }
+Line 118: [91m[1m​[22m[39m
+Line 119: [91m[1m"build.command" failed                                        [22m[39m
+Line 120: [91m[1m────────────────────────────────────────────────────────────────[22m[39m
+Line 121: ​
+Line 122:   [31m[1mError message[22m[39m
+Line 123:   Command failed with exit code 1: node build-static.js
+Line 124: ​
+Line 125:   [31m[1mError location[22m[39m
+Line 126:   In build.command from netlify.toml:
+Line 127:   node build-static.js
+Line 128: ​
+Line 129:   [31m[1mResolved config[22m[39m
+Line 130:   build:
+Line 131:     command: node build-static.js
+Line 132:     commandOrigin: config
+Line 133:     environment:
+Line 134:       - DATABASE_PASSWORD
+Line 135:       - DATABASE_URL
+Line 138:       - VITE_SUPABASE_URL
+Line 139:       - NODE_VERSION
+Line 140:       - NPM_VERSION
+Line 141:     publish: /opt/build/repo/dist/public
+Line 142:     publishOrigin: config
+Line 143:   functions:
+Line 144:     "*":
+Line 145:       node_bundler: esbuild
+Line 146:   functionsDirectory: /opt/build/repo/netlify/functions
+Line 147:   headers:
+Line 148: Failed during stage 'building site': Build script returned non-zero exit code: 2
+Line 149:     - for: /*
+      values:
+        Referrer-Policy: strict-origin-when-cross-origin
+        X-Content-Type-Options: nosniff
+   
+Line 150: Build failed due to a user error: Build script returned non-zero exit code: 2
+Line 151: Failing build: Failed to build site
+Line 152: Finished processing build request in 23.774s
