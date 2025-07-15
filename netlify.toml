@@ -1,6 +1,6 @@
 [build]
   publish = "dist/public"
-  command = "node simple-build.js"
+  command = "npm install && node netlify-production-build.js"
 
 [build.environment]
   NODE_VERSION = "20"
@@ -11,9 +11,13 @@
   VITE_SUPABASE_URL = "${VITE_SUPABASE_URL}"
   VITE_SUPABASE_ANON_KEY = "${VITE_SUPABASE_ANON_KEY}"
 
+# Plugin to automatically install function dependencies
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
+
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/:splat"
+  to = "/.netlify/functions/api/:splat"
   status = 200
 
 [[redirects]]
@@ -22,7 +26,7 @@
   status = 200
 
 [functions]
-  directory = "netlify/functions"
+  directory = "dist/netlify/functions"
   node_bundler = "esbuild"
 
 [[headers]]
